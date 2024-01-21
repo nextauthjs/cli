@@ -3,7 +3,10 @@ import { Command } from "commander"
 // import pkg from "./package.json" assert { type: "json" }
 
 import fs from "fs/promises"
-const pkg = JSON.parse(await fs.readFile("./package.json"))
+import { join } from "path"
+import { fileURLToPath } from "url"
+const __dirname = fileURLToPath(new URL(".", import.meta.url))
+const pkg = JSON.parse(await fs.readFile(join(__dirname, "./package.json")))
 const { name, description, version } = pkg
 
 try {
