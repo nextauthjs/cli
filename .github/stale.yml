@@ -1,0 +1,20 @@
+# https://github.com/probot/stale#usage
+
+daysUntilStale: 60
+daysUntilClose: 7
+exemptLabels:
+  - pinned
+  - security
+  - priority
+  - bug
+  - triage
+  - accepted
+staleLabel: stale
+markComment: >
+  It looks like this issue did not receive any activity for 60 days.
+  It will be closed in 7 days if no further activity occurs. If you think your issue
+  is still relevant, commenting will keep it open. Thanks!
+closeComment: >
+  To keep things tidy, we are closing this issue for now.
+  If you think your issue is still relevant, leave a comment
+  and we might reopen it. Thanks!
