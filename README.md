@@ -1,6 +1,6 @@
 # Auth.js CLI
 
-The CLI tool by [Auth.js](https://authjs.dev) to supercharge your authentication workflow
+The CLI tool by [Auth.js](https://authjs.dev) to supercharge your authentication workflow.
 
 ## Installation
 
@@ -16,8 +16,6 @@ npx auth
 
 ```sh
 Usage: auth [options] [command]
-
-The CLI tool by Auth.js to supercharge your authentication workflow
 
 Options:
   -V, --version          output the version number
