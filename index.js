@@ -32,6 +32,7 @@ Secret generated. Copy it to your .env/.env.local file (depending on your framew
 AUTH_SECRET=${randomString()}`)
   })
 
+// TODO: Get this programmatically
 const frameworks = {
   nextjs: {
     src: "https://github.com/nextauthjs/next-auth-example",
