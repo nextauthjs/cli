@@ -24,7 +24,7 @@ Options:
   -h, --help             display help for command
 
 Commands:
-  secret                 Generate a random string.
+  secret [options]       Generate a random string.
   framework [framework]  Clone a framework template.
   help [command]         display help for command
 ```
