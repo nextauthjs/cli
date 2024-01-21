@@ -1,6 +1,6 @@
 {
   "name": "auth",
-  "description": "The CLI tool by Auth.js to supercharge your authentication workflow",
+  "description": "The CLI tool by Auth.js to supercharge your authentication workflow.",
   "homepage": "https://cli.authjs.dev",
   "version": "1.0.0",
   "type": "module",
