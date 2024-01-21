@@ -1,0 +1,28 @@
+{
+  "name": "auth",
+  "description": "The CLI tool by Auth.js to supercharge your authentication workflow",
+  "homepage": "https://cli.authjs.dev",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "auth": "index.js"
+  },
+  "files": [
+    "*.d.ts*",
+    "*.js",
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "authjs",
+    "cli"
+  ],
+  "author": "Balázs Orbán <info@balazsorban.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "11.1.0"
+  },
+  "prettier": {
+    "semi": false
+  }
+}
