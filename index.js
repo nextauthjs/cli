@@ -23,13 +23,16 @@ program.name(name).description(description).version(version)
 
 program
   .command("secret")
+  .option("--raw", "Output the string without any formatting.")
   .description("Generate a random string.")
-  .action(() => {
+  .action((options) => {
+    const value = randomString()
+    if (options.raw) return console.log(value)
     // TODO: Detect framework, check for existing value, and write automatically
     console.log(`
 Secret generated. Copy it to your .env/.env.local file (depending on your framework):
 
-AUTH_SECRET=${randomString()}`)
+AUTH_SECRET=${value}`)
   })
 
 // TODO: Get this programmatically
