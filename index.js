@@ -1,5 +1,8 @@
 import { InvalidArgumentError } from "commander"
 import { Command } from "commander"
+import { frameworks, action as frameworkAction } from "./commands/framework.js"
+import { action as secretAction } from "./commands/secret.js"
+import chalk from "chalk"
 // import pkg from "./package.json" assert { type: "json" }
 
 import fs from "fs/promises"
@@ -14,45 +17,33 @@ try {
   globalThis.crypto ??= (await import("crypto")).webcrypto
 } catch {}
 
-/** Web compatible method to create a random string of a given length */
-export function randomString(size = 32) {
-  const bytes = crypto.getRandomValues(new Uint8Array(size))
-  return Buffer.from(bytes, "base64").toString("base64")
-}
-
 const program = new Command()
 
-program.name(name).description(description).version(version)
+const timeLabel = "command duration"
 
 program
-  .command("secret")
-  .option("--raw", "Output the string without any formatting.")
-  .description("Generate a random string.")
-  .action((options) => {
-    const value = randomString()
-    if (options.raw) return console.log(value)
-    // TODO: Detect framework, check for existing value, and write automatically
-    console.log(`
-Secret generated. Copy it to your .env/.env.local file (depending on your framework):
-
-AUTH_SECRET=${value}`)
+  .name(name)
+  .description(description)
+  .version(version)
+  .option("--trace", "display trace statements for commands")
+  .option("--profile", "show how long a command takes")
+  .hook("preAction", (thisCommand, actionCommand) => {
+    if (thisCommand.opts().trace) {
+      console.log(
+        `About to call action handler for subcommand: ${actionCommand.name()}`
+      )
+      console.log(chalk.bold.green("Arguments:"), actionCommand.args)
+      console.log(chalk.bold.green("Options:"), actionCommand.opts())
+    }
+    if (thisCommand.opts().profile) {
+      console.time(timeLabel)
+    }
   })
-
-// TODO: Get this programmatically
-const frameworks = {
-  nextjs: {
-    src: "https://github.com/nextauthjs/next-auth-example",
-    demo: "https://next-auth-example.vercel.app",
-  },
-  sveltekit: {
-    src: "https://github.com/nextauthjs/sveltekit-auth-example",
-    demo: "https://sveltekit-auth-example.vercel.app",
-  },
-  express: {
-    src: "https://github.com/nextauthjs/express-auth-example",
-    demo: "https://express-auth-example.vercel.app",
-  },
-}
+  .hook("postAction", (thisCommand) => {
+    if (thisCommand.opts().profile) {
+      console.timeEnd(timeLabel)
+    }
+  })
 
 program
   .command("framework")
@@ -64,15 +55,14 @@ program
     )
   })
   .description("Clone a framework template.")
-  .action((framework) => {
-    if (!framework) {
-      return console.log(`
-Supported frameworks are: ${Object.keys(frameworks).join(", ")}`)
-    }
-    const { src, demo } = frameworks[framework]
-    console.log(`
-Source code: ${src}
-Deployed demo: ${demo}`)
-  })
+  .action(frameworkAction)
+
+program
+  .command("secret")
+  .option("--raw", "Output the string without any formatting.")
+  .description("Generate a random string.")
+  .action(secretAction)
 
 program.parse(process.argv)
+
+export { program }
