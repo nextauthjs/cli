@@ -54,7 +54,11 @@ Commands:
 
 If you think you have found a vulnerability (or are not sure) in Auth.js or any of the related packages (i.e. Adapters), we ask you to read our [Security Policy](https://authjs.dev/security) to reach out responsibly. Please do not open Pull Requests/Issues/Discussions before consulting with us.
 
-## Sponsors
+## Acknowledgements
+
+Special thanks to Craig for the `auth` package name on npm.
+
+### Sponsors
 
 We have an [OpenCollective](https://opencollective.com/nextauth) for companies and individuals looking to contribute financially to the project!
 
@@ -151,6 +155,11 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
 <br />
 <!--sponsors end-->
 
-## Acknowledgements
+## Contributing
 
-Special thanks to Craig for the `auth` package name on npm.
+We're open to all community contributions! If you'd like to contribute in any way, please first read
+our [Contributing Guide](https://github.com/nextauthjs/.github/blob/main/CONTRIBUTING.md).
+
+## License
+
+MIT
