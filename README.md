@@ -12,13 +12,21 @@ npx auth
 
 ## Usage
 
-```sh
-Usage: auth secret [options]
+<!-- TODO: Generate by running `node index.js --help` and writing this -->
 
-Generate a random string.
+```sh
+Usage: auth [options] [command]
+
+The CLI tool by Auth.js to supercharge your authentication workflow
 
 Options:
-  -h, --help  display help for command
+  -V, --version          output the version number
+  -h, --help             display help for command
+
+Commands:
+  secret                 Generate a random string.
+  framework [framework]  Clone a framework template.
+  help [command]         display help for command
 ```
 
 ## Acknowledgements
