@@ -1,8 +1,17 @@
 {
   "name": "auth",
-  "description": "The CLI tool by Auth.js to supercharge your authentication workflow.",
-  "homepage": "https://cli.authjs.dev",
   "version": "1.0.2",
+  "homepage": "https://cli.authjs.dev",
+  "repository": "https://github.com/nextauthjs/auth-cli.git",
+  "description": "The CLI tool by Auth.js to supercharge your authentication workflow.",
+  "author": "Balázs Orbán <info@balazsorban.com>",
+  "contributors": [
+    "Balázs Orbán <info@balazsorban.com>",
+    "Nico Domino <yo@ndo.dev>",
+    "Lluis Agusti <hi@llu.lu>",
+    "Thang Huu Vu <hi@thvu.dev>"
+  ],
+  "license": "MIT",
   "type": "module",
   "bin": {
     "auth": "index.js"
@@ -17,8 +26,6 @@
     "authjs",
     "cli"
   ],
-  "author": "Balázs Orbán <info@balazsorban.com>",
-  "license": "MIT",
   "dependencies": {
     "commander": "11.1.0"
   },
