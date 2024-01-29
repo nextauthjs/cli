@@ -10,7 +10,7 @@ function randomString(size = 32) {
   return Buffer.from(bytes, "base64").toString("base64")
 }
 
-export async function action(options) {
+export function action(options) {
   let value = randomString()
   if (options.raw) return console.log(value)
 

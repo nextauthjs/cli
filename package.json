@@ -28,6 +28,7 @@
     "cli"
   ],
   "dependencies": {
+    "@inquirer/prompts": "3.3.2",
     "commander": "11.1.0",
     "yoctocolors": "1.0.0"
   },
