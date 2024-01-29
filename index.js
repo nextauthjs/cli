@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // @ts-check
 
 import { InvalidArgumentError } from "commander"
