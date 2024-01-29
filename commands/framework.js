@@ -16,7 +16,7 @@ export const frameworks = {
   },
 }
 
-export const action = (framework) => {
+export function action(framework) {
   if (!framework) {
     return console.log(`
 Supported frameworks are: ${Object.keys(frameworks).join(", ")}`)

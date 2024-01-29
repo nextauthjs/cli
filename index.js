@@ -4,8 +4,8 @@
 
 import { InvalidArgumentError } from "commander"
 import { Command } from "commander"
-import { frameworks, action as frameworkAction } from "./commands/framework.js"
-import { action as secretAction } from "./commands/secret.js"
+import { ask, framework, secret } from "./commands/index.js"
+
 // import pkg from "./package.json" assert { type: "json" }
 
 import fs from "fs/promises"
@@ -31,20 +31,25 @@ program
   .command("framework")
   .argument("[framework]", "The framework to use.", (value) => {
     if (!value) return value
-    if (Object.keys(frameworks).includes(value)) return value
+    if (Object.keys(framework.frameworks).includes(value)) return value
     throw new InvalidArgumentError(
-      `Valid frameworks are: ${frameworks.join(", ")}`
+      `Valid frameworks are: ${framework.frameworks.join(", ")}`
     )
   })
   .description("Clone a framework template.")
-  .action(frameworkAction)
+  .action(framework.action)
 
 program
   .command("secret")
   .option("--raw", "Output the string without any formatting.")
   .option("--copy", 'Copy AUTH_SECRET="value"')
   .description("Generate a random string.")
-  .action(secretAction)
+  .action(secret.action)
+
+program
+  .command("ask")
+  .description("Ask any question about docs, API, etc.")
+  .action(ask.action)
 
 program.parse()
 
