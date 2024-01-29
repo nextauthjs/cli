@@ -1,3 +1,5 @@
+// @ts-check
+
 // TODO: Get this programmatically
 export const frameworks = {
   nextjs: {

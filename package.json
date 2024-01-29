@@ -10,6 +10,7 @@
   "files": [
     "*.d.ts*",
     "*.js",
+    "commands",
     "lib",
     "src"
   ],
@@ -20,12 +21,10 @@
   "author": "Balázs Orbán <info@balazsorban.com>",
   "license": "MIT",
   "dependencies": {
-    "commander": "11.1.0"
+    "commander": "11.1.0",
+    "yoctocolors": "1.0.0"
   },
   "prettier": {
     "semi": false
-  },
-  "devDependencies": {
-    "chalk": "^5.3.0"
   }
 }
