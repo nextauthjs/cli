@@ -13,7 +13,7 @@ export async function action() {
       body: JSON.stringify({ query }),
     })
 
-    const result = await response.json()
+    const result = await response.text()
     if (!response.ok) return console.error(y.red(result))
 
     console.log(result)
