@@ -19,6 +19,7 @@
   "files": [
     "*.d.ts*",
     "*.js",
+    "commands",
     "lib",
     "src"
   ],
@@ -27,7 +28,8 @@
     "cli"
   ],
   "dependencies": {
-    "commander": "11.1.0"
+    "commander": "11.1.0",
+    "yoctocolors": "1.0.0"
   },
   "prettier": {
     "semi": false
