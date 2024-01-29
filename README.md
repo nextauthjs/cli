@@ -45,8 +45,9 @@ Options:
   -h, --help             display help for command
 
 Commands:
-  secret [options]       Generate a random string.
+  ask                    Ask any question about docs, API, etc.
   framework [framework]  Clone a framework template.
+  secret [options]       Generate a random string.
   help [command]         display help for command
 ```
 

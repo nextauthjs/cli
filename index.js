@@ -28,6 +28,11 @@ const program = new Command()
 program.name(name).description(description).version(version)
 
 program
+  .command("ask")
+  .description("Ask any question about docs, API, etc.")
+  .action(ask.action)
+
+program
   .command("framework")
   .argument("[framework]", "The framework to use.", (value) => {
     if (!value) return value
@@ -45,11 +50,6 @@ program
   .option("--copy", 'Copy AUTH_SECRET="value"')
   .description("Generate a random string.")
   .action(secret.action)
-
-program
-  .command("ask")
-  .description("Ask any question about docs, API, etc.")
-  .action(ask.action)
 
 program.parse()
 
