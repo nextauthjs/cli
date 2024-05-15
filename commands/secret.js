@@ -5,6 +5,7 @@ import { write } from "../lib/clipboard/index.js"
 import { detectFramework } from "../lib/detect.js"
 import { readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
+import prompt from "prompts"
 
 /** Web compatible method to create a random string of a given length */
 function randomString(size = 32) {
@@ -87,6 +88,13 @@ async function updateEnvFile(file, envPath, key, value) {
       console.log(`➕ Added ${key} to ${y.italic(file)}.`)
       content = `${line}\n${content}`
     } else {
+      const { overwrite } = await prompt({
+        type: "confirm",
+        name: "overwrite",
+        message: `Overwrite existing ${key}?`,
+        initial: false,
+      })
+      if (!overwrite) return
       console.log(`✨ Updated ${key} in ${y.italic(file)}.`)
       content = content.replace(new RegExp(`${key}=(.*)`), `${line}`)
     }
