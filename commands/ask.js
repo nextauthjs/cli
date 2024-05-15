@@ -4,16 +4,28 @@ import * as y from "yoctocolors"
 import { input } from "@inquirer/prompts"
 import { InkeepAI } from "@inkeep/ai-api"
 import { ChatModeOptions } from "@inkeep/ai-api/models/components/index.js"
-import ora from "ora"
+import * as ora from "ora"
 
 const INKEEP_API_KEY = "e32967a320a48a2cd933922099e1f38f6ebb4ab62ff98343"
 const INKEEP_INTEGRATION_ID = "clvn0fdez000cip0e5w2oaobw"
 
 const inkeepAI = new InkeepAI({ apiKey: INKEEP_API_KEY })
 
+function randomSpinner() {
+  const allSpinners = Object.keys(ora.spinners)
+  const max = allSpinners.length - 1
+  const random = Math.floor(Math.random() * (max + 1))
+  return allSpinners[random]
+}
+
 export async function action({ stream = false, raw = false }) {
   const format = raw ? (i) => i : markdownToAnsi
-  const spinner = ora("Understanding question")
+  const newLocal = randomSpinner()
+  const spinner = ora.default({
+    text: "Understanding question",
+    // @ts-expect-error
+    spinner: newLocal,
+  })
   try {
     const content = await input({ message: "What would you like to know: " })
 
