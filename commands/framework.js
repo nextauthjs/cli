@@ -1,5 +1,7 @@
 // @ts-check
 
+import { detectFramework } from "../lib/detect.js"
+
 // TODO: Get this programmatically
 export const frameworks = {
   nextjs: {
@@ -16,8 +18,9 @@ export const frameworks = {
   },
 }
 
-export function action(framework) {
-  if (!framework) {
+export async function action(framework) {
+  framework ??= await detectFramework()
+  if (framework === "unknown") {
     return console.log(`
 Supported frameworks are: ${Object.keys(frameworks).join(", ")}`)
   }
