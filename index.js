@@ -29,6 +29,8 @@ program.name(name).description(description).version(version)
 
 program
   .command("ask")
+  .option("--stream", "Stream the response.")
+  .option("--raw", "Shows the Markdown response without formatting.")
   .description("Ask any question about docs, API, etc.")
   .action(ask.action)
 
