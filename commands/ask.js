@@ -43,7 +43,7 @@ export async function action({ stream = false, raw = false }) {
       const answer = result.chatResult?.message.content
       if (!answer) return console.error(y.red("Could not get an answer."))
 
-      console.log(formatStringToLines(format(answer), 80))
+      console.log(breakStringToLines(format(answer), 80))
     }
 
     console.log(
@@ -114,7 +114,7 @@ function markdownToAnsi(input) {
  * @param {number} maxLineLength
  * @returns {string}
  */
-function formatStringToLines(str, maxLineLength) {
+function breakStringToLines(str, maxLineLength) {
   let result = ""
   let line = ""
 
