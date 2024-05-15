@@ -34,5 +34,8 @@
   },
   "prettier": {
     "semi": false
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12"
   }
 }
