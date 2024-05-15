@@ -50,6 +50,13 @@ export async function action(options) {
   if (options.write) {
     try {
       const framework = await detectFramework()
+      if (framework === "unknown") {
+        return console.log(
+          `No framework detected. Currently supported frameworks are: ${y.bold(
+            Object.keys(frameworkDotEnvFile).join(", ")
+          )}`
+        )
+      }
       const dotEnvFile = frameworkDotEnvFile[framework]
       await updateEnvFile(
         dotEnvFile,
