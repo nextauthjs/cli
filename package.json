@@ -32,9 +32,13 @@
     "@inquirer/prompts": "3.3.2",
     "commander": "11.1.0",
     "ora": "^8.0.1",
+    "prompts": "^2.4.2",
     "yoctocolors": "1.0.0"
   },
   "prettier": {
     "semi": false
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12"
   }
 }

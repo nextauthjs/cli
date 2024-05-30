@@ -37,7 +37,6 @@ program
 program
   .command("framework")
   .argument("[framework]", "The framework to use.", (value) => {
-    if (!value) return value
     if (Object.keys(framework.frameworks).includes(value)) return value
     throw new InvalidArgumentError(
       `Valid frameworks are: ${framework.frameworks.join(", ")}`
@@ -50,6 +49,7 @@ program
   .command("secret")
   .option("--raw", "Output the string without any formatting.")
   .option("--copy", 'Copy AUTH_SECRET="value"')
+  .option("--write", 'Write AUTH_SECRET="value" to the .env file.')
   .description("Generate a random string.")
   .action(secret.action)
 
