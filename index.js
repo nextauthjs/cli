@@ -4,13 +4,14 @@
 
 import { Command, InvalidArgumentError } from "commander"
 import * as y from "yoctocolors"
-import { ask, framework, secret } from "./commands/index.js"
+import { ask, init, secret } from "./commands/index.js"
 
 // import pkg from "./package.json" assert { type: "json" }
 
-import fs from "fs/promises"
-import { join } from "path"
-import { fileURLToPath } from "url"
+import fs from "node:fs/promises"
+import { join } from "node:path"
+import { fileURLToPath } from "node:url"
+
 const __dirname = fileURLToPath(new URL(".", import.meta.url))
 const pkg = JSON.parse(
   await fs.readFile(join(__dirname, "./package.json"), "utf-8")
@@ -32,28 +33,24 @@ program
 
 program
   .command("ask")
-  .option("--stream", "stream the response")
-  .option("--raw", "show the Markdown response without formatting")
-  .description("ask about docs, API, or auth concepts")
+  .option("--stream", "Stream the response.")
+  .option("--raw", "Show the Markdown response without formatting.")
+  .description("Ask about docs, API, or auth concepts.")
   .action(ask.action)
 
 program
-  .command("framework")
-  .argument("[framework]", "The framework to use.", (value) => {
-    if (Object.keys(framework.frameworks).includes(value)) return value
-    throw new InvalidArgumentError(
-      `Valid frameworks are: ${framework.frameworks.join(", ")}`
-    )
-  })
-  .description("clone a framework template")
-  .action(framework.action)
+  .command("init")
+  .argument("[framework]", "The framework to use.")
+  .option("-e, --example", "Clone a full example.")
+  .description("Initialize a project.")
+  .action(init.action)
 
 program
   .command("secret")
   .option("--raw", "Output the string without any formatting.")
-  .option("--copy", 'Copy AUTH_SECRET="value"')
+  .option("--copy", 'Copy AUTH_SECRET="value".')
   .option("--write", 'Write AUTH_SECRET="value" to the .env file.')
-  .description("generate a random string")
+  .description("Generate a random string.")
   .action(secret.action)
 
 program.parse()

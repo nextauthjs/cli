@@ -21,6 +21,14 @@ export const frameworkDotEnvFile = {
   sveltekit: ".env",
 }
 
+/**
+ * @param {{
+ *  copy?: boolean
+ *  path?: string
+ *  raw?: boolean
+ *  write?:boolean
+ * }} options
+ */
 export async function action(options) {
   const key = "AUTH_SECRET"
   const value = randomString()
@@ -50,7 +58,7 @@ export async function action(options) {
 
   if (options.write) {
     try {
-      const framework = await detectFramework()
+      const framework = await detectFramework(options.path)
       if (framework === "unknown") {
         return console.log(
           `No framework detected. Currently supported frameworks are: ${y.bold(
@@ -61,7 +69,7 @@ export async function action(options) {
       const dotEnvFile = frameworkDotEnvFile[framework]
       await updateEnvFile(
         dotEnvFile,
-        join(process.cwd(), dotEnvFile),
+        join(process.cwd(), options.path ?? "", dotEnvFile),
         key,
         value
       )
