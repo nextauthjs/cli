@@ -4,13 +4,14 @@
 
 import { Command, InvalidArgumentError } from "commander"
 import * as y from "yoctocolors"
-import { ask, framework, secret } from "./commands/index.js"
+import { ask, init, secret } from "./commands/index.js"
 
 // import pkg from "./package.json" assert { type: "json" }
 
-import fs from "fs/promises"
-import { join } from "path"
-import { fileURLToPath } from "url"
+import fs from "node:fs/promises"
+import { join } from "node:path"
+import { fileURLToPath } from "node:url"
+
 const __dirname = fileURLToPath(new URL(".", import.meta.url))
 const pkg = JSON.parse(
   await fs.readFile(join(__dirname, "./package.json"), "utf-8")
@@ -38,15 +39,15 @@ program
   .action(ask.action)
 
 program
-  .command("framework")
+  .command("init")
   .argument("[framework]", "The framework to use.", (value) => {
-    if (Object.keys(framework.frameworks).includes(value)) return value
+    if (Object.keys(init.frameworks).includes(value)) return value
     throw new InvalidArgumentError(
-      `Valid frameworks are: ${framework.frameworks.join(", ")}`
+      `Valid frameworks are: ${init.frameworks.join(", ")}`
     )
   })
-  .description("clone a framework template")
-  .action(framework.action)
+  .description("initialize a project")
+  .action(init.action)
 
 program
   .command("secret")

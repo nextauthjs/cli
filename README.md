@@ -37,14 +37,14 @@ npx auth # or pnpx, bunx, yarn dlx, etc.
 Usage: auth [options] [command]
 
 Options:
-  -V, --version          output the version number
-  -h, --help             display help for command
+  -V, --version     output the version number
+  -h, --help        display help for command
 
 Commands:
-  ask [options]          ask about docs, API, or auth concepts
-  framework [framework]  clone a framework template
-  secret [options]       generate a random string
-  help [command]         display help for command
+  ask [options]     ask about docs, API, or auth concepts
+  init [framework]  initialize a project
+  secret [options]  generate a random string
+  help [command]    display help for command
 ```
 
 <!-- GENERATED END -->
