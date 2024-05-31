@@ -33,28 +33,24 @@ program
 
 program
   .command("ask")
-  .option("--stream", "stream the response")
-  .option("--raw", "show the Markdown response without formatting")
-  .description("ask about docs, API, or auth concepts")
+  .option("--stream", "Stream the response.")
+  .option("--raw", "Show the Markdown response without formatting.")
+  .description("Ask about docs, API, or auth concepts.")
   .action(ask.action)
 
 program
   .command("init")
-  .argument("[framework]", "The framework to use.", (value) => {
-    if (Object.keys(init.frameworks).includes(value)) return value
-    throw new InvalidArgumentError(
-      `Valid frameworks are: ${init.frameworks.join(", ")}`
-    )
-  })
-  .description("initialize a project")
+  .argument("[framework]", "The framework to use.")
+  .option("-e, --example", "Clone a full example.")
+  .description("Initialize a project.")
   .action(init.action)
 
 program
   .command("secret")
   .option("--raw", "Output the string without any formatting.")
-  .option("--copy", 'Copy AUTH_SECRET="value"')
+  .option("--copy", 'Copy AUTH_SECRET="value".')
   .option("--write", 'Write AUTH_SECRET="value" to the .env file.')
-  .description("generate a random string")
+  .description("Generate a random string.")
   .action(secret.action)
 
 program.parse()
