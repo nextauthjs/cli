@@ -19,11 +19,9 @@
     </a>
   </p>
   <p align="center">
-    Auth.js CLI is a multi-purpose CLI to get started and manage Auth.js projects.
+    The CLI tool by [Auth.js](https://authjs.dev) to supercharge your authentication workflows.
   </p>
 </p>
-
-The CLI tool by [Auth.js](https://authjs.dev) to supercharge your authentication workflow.
 
 ## Installation
 
@@ -35,7 +33,7 @@ npx auth
 
 ## Usage
 
-<!-- TODO: Generate by running `node index.js --help` and writing this -->
+<!-- GENERATED START -->
 
 ```sh
 Usage: auth [options] [command]
@@ -45,11 +43,13 @@ Options:
   -h, --help             display help for command
 
 Commands:
-  ask                    Ask any question about docs, API, etc.
-  framework [framework]  Clone a framework template.
-  secret [options]       Generate a random string.
+  ask [options]          ask about docs, API, or auth concepts
+  framework [framework]  clone a framework template
+  secret [options]       generate a random string
   help [command]         display help for command
 ```
+
+<!-- GENERATED END -->
 
 ## Security
 

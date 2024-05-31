@@ -3,7 +3,10 @@
   "version": "1.0.2",
   "homepage": "https://cli.authjs.dev",
   "repository": "https://github.com/nextauthjs/auth-cli.git",
-  "description": "The CLI tool by Auth.js to supercharge your authentication workflow.",
+  "description": "The CLI tool by Auth.js to supercharge your authentication workflows.",
+  "scripts": {
+    "generate-docs": "node ./generate-docs"
+  },
   "author": "Balázs Orbán <info@balazsorban.com>",
   "contributors": [
     "Balázs Orbán <info@balazsorban.com>",
@@ -28,8 +31,10 @@
     "cli"
   ],
   "dependencies": {
+    "@inkeep/ai-api": "^0.7.2",
     "@inquirer/prompts": "3.3.2",
     "commander": "11.1.0",
+    "ora": "^8.0.1",
     "prompts": "^2.4.2",
     "yoctocolors": "1.0.0"
   },
@@ -38,5 +43,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.12"
+  },
+  "engines": {
+    "node": ">=20.11.0"
   }
 }
