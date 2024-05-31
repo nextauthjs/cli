@@ -49,8 +49,7 @@ program
   .command("secret")
   .option("--raw", "Output the string without any formatting.")
   .option("--copy", 'Copy AUTH_SECRET="value".')
-  .option("--write", 'Write AUTH_SECRET="value" to the .env file.')
-  .description("Generate a random string.")
+  .description("Generate a random string and add it to the .env file.")
   .action(secret.action)
 
 program.parse()

@@ -2,7 +2,10 @@
   "name": "auth",
   "version": "1.0.2",
   "homepage": "https://cli.authjs.dev",
-  "repository": "https://github.com/nextauthjs/auth-cli.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextauthjs/auth-cli.git"
+  },
   "description": "The CLI tool by Auth.js to supercharge your authentication workflows.",
   "scripts": {
     "generate-docs": "node ./generate-docs"
@@ -46,5 +49,12 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "bugs": {
+    "url": "https://github.com/nextauthjs/auth-cli/issues"
+  },
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
   }
 }

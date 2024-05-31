@@ -4,8 +4,10 @@ import { input, confirm, select, checkbox } from "@inquirer/prompts"
 import * as y from "yoctocolors"
 import { action as secretAction } from "./secret.js"
 
-import { install } from "../lib/pkg-manager.js"
+import { getPkgManager, install } from "../lib/pkg-manager.js"
 import * as meta from "../lib/meta.js"
+import { updateEnvFile } from "../lib/write-env.js"
+import { mkdir } from "node:fs/promises"
 
 /**
  * @param {string} framework
@@ -89,6 +91,26 @@ async function createFromExample(framework, dir) {
  * @param {{framework: string, dir: string, providers: string[], adapter?: string}} options
  */
 async function scaffoldProject(options) {
-  console.log(options)
-  throw new Error("Not implemented")
+  const { framework, providers, dir, adapter } = options
+  const pkgManager = getPkgManager()
+  console.log(
+    `Scaffolding ${y.bold(framework)} project with ${y.bold(
+      pkgManager
+    )} at ${y.bold(dir)}...`
+  )
+  throw new Error("Scaffolding not implemented. Please use `init --example`")
+  console.log(`Create directory ${dir}`)
+  await mkdir(dir)
+  console.log(`Change directory to ${dir}`)
+  execSync(`cd ${dir}`)
+  console.log(`Initialize ${pkgManager} project`)
+  execSync(`${pkgManager} init`)
+  // console.log(`Add ${framework} to ${pkgManager}`)
+  // execSync(`${pkgManager} install ${framework}`)
+  for (const provider of providers) {
+    const id = `AUTH_${provider.toUpperCase()}_ID`
+    const secret = `AUTH_${provider.toUpperCase()}_SECRET`
+    await updateEnvFile(dir, id, "")
+    await updateEnvFile(dir, secret, "")
+  }
 }

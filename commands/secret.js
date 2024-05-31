@@ -3,22 +3,15 @@
 import * as y from "yoctocolors"
 import { write } from "../lib/clipboard/index.js"
 import { detectFramework } from "../lib/detect.js"
-import { readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
-import prompt from "prompts"
+import { updateEnvFile } from "../lib/write-env.js"
+import { frameworks } from "../lib/meta.js"
 
 /** Web compatible method to create a random string of a given length */
 function randomString(size = 32) {
   const bytes = crypto.getRandomValues(new Uint8Array(size))
   // @ts-expect-error
   return Buffer.from(bytes, "base64").toString("base64")
-}
-
-/** @type {Record<import("../lib/detect.js").SupportedFramework, string>} */
-export const frameworkDotEnvFile = {
-  nextjs: ".env.local",
-  express: ".env",
-  sveltekit: ".env",
 }
 
 /**
@@ -56,63 +49,18 @@ export async function action(options) {
     }
   }
 
-  if (options.write) {
-    try {
-      const framework = await detectFramework(options.path)
-      if (framework === "unknown") {
-        return console.log(
-          `No framework detected. Currently supported frameworks are: ${y.bold(
-            Object.keys(frameworkDotEnvFile).join(", ")
-          )}`
-        )
-      }
-      const dotEnvFile = frameworkDotEnvFile[framework]
-      await updateEnvFile(
-        dotEnvFile,
-        join(process.cwd(), options.path ?? "", dotEnvFile),
-        key,
-        value
-      )
-    } catch (error) {
-      console.error(y.red(error))
-    }
-  }
-}
-
-/**
- * Update a key-value pair to a .env file
- * @param {string} file
- * @param {string} envPath
- * @param {string} key
- * @param {string} value
- */
-async function updateEnvFile(file, envPath, key, value) {
-  let content = ""
-  const line = `${key}="${value}" # Added by \`npx auth\`. Read more: https://cli.authjs.dev`
   try {
-    await readFile(envPath, "utf-8")
-    content = await readFile(envPath, "utf-8")
-    if (!content.includes(`${key}=`)) {
-      console.log(`➕ Added ${key} to ${y.italic(file)}.`)
-      content = `${line}\n${content}`
-    } else {
-      const { overwrite } = await prompt({
-        type: "confirm",
-        name: "overwrite",
-        message: `Overwrite existing ${key}?`,
-        initial: false,
-      })
-      if (!overwrite) return
-      console.log(`✨ Updated ${key} in ${y.italic(file)}.`)
-      content = content.replace(new RegExp(`${key}=(.*)`), `${line}`)
+    const framework = await detectFramework(options.path)
+    if (framework === "unknown") {
+      return console.log(
+        `No framework detected. Currently supported frameworks are: ${y.bold(
+          Object.keys(frameworks).join(", ")
+        )}`
+      )
     }
+
+    await updateEnvFile(options.path, key, value)
   } catch (error) {
-    if (error.code === "ENOENT") {
-      console.log(`📝 Created ${y.italic(file)} with ${key}.`)
-      content = line
-    } else {
-      throw error
-    }
+    console.error(y.red(error))
   }
-  if (content) await writeFile(envPath, content)
 }
