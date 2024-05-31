@@ -2,8 +2,8 @@
 
 // @ts-check
 
-import { InvalidArgumentError } from "commander"
-import { Command } from "commander"
+import { Command, InvalidArgumentError } from "commander"
+import * as y from "yoctocolors"
 import { ask, framework, secret } from "./commands/index.js"
 
 // import pkg from "./package.json" assert { type: "json" }
@@ -25,13 +25,16 @@ try {
 
 const program = new Command()
 
-program.name(name).description(description).version(version)
+program
+  .name(name)
+  .description(description.replace("Auth.js", y.magenta(y.bold("Auth.js"))))
+  .version(version)
 
 program
   .command("ask")
-  .option("--stream", "Stream the response.")
-  .option("--raw", "Shows the Markdown response without formatting.")
-  .description("Ask any question about docs, API, etc.")
+  .option("--stream", "stream the response")
+  .option("--raw", "show the Markdown response without formatting")
+  .description("ask about docs, API, or auth concepts")
   .action(ask.action)
 
 program
@@ -42,7 +45,7 @@ program
       `Valid frameworks are: ${framework.frameworks.join(", ")}`
     )
   })
-  .description("Clone a framework template.")
+  .description("clone a framework template")
   .action(framework.action)
 
 program
@@ -50,7 +53,7 @@ program
   .option("--raw", "Output the string without any formatting.")
   .option("--copy", 'Copy AUTH_SECRET="value"')
   .option("--write", 'Write AUTH_SECRET="value" to the .env file.')
-  .description("Generate a random string.")
+  .description("generate a random string")
   .action(secret.action)
 
 program.parse()
