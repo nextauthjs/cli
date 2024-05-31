@@ -1,34 +1,32 @@
 <p align="center">
   <br/>
-  <a href="https://authjs.dev" target="_blank"><img width="96px" src="https://authjs.dev/img/logo/logo-sm.png" /></a>
+  <a href="https://authjs.dev" target="_blank"><img width="96px" src="https://authjs.dev/img/logo-sm.png" /></a>
   <h3 align="center">Auth.js CLI</h3>
-  <p align="center">Authentication for the Web.</p>
-  <p align="center">Open Source. Full Stack. Own Your Data.</p>
+  <p align="center">
+    The CLI tool by <a href="https://authjs.dev">Auth.js</a> to supercharge your authentication workflows.
+  </p>
   <p align="center" style="align: center;">
     <a href="https://npm.im/auth">
-      <img src="https://img.shields.io/badge/TypeScript-blue?style=flat-square" alt="TypeScript" />
+      <img src="https://img.shields.io/badge/JavaScript-grey?style=flat-square&logo=javascript" alt="JavaScript" />
     </a>
     <a href="https://www.npmtrends.com/auth">
-      <img src="https://img.shields.io/npm/dm/auth?style=flat-square" alt="Downloads" />
-    </a>
-    <a href="https://github.com/nextauthjs/auth-cli/stargazers">
-      <img src="https://img.shields.io/github/stars/nextauthjs/auth-cli?style=flat-square" alt="Github Stars" />
+      <img src="https://img.shields.io/npm/dm/auth?style=flat-square&color=cyan" alt="Downloads" />
     </a>
     <a href="https://www.npmjs.com/package/auth">
-      <img src="https://img.shields.io/github/v/release/nextauthjs/auth-cli?label=latest&style=flat-square" alt="Github Stable Release" />
+      <img src="https://img.shields.io/npm/v/auth?style=flat-square&label=latest&color=purple" alt="npm latest release" />
     </a>
-  </p>
-  <p align="center">
-    The CLI tool by [Auth.js](https://authjs.dev) to supercharge your authentication workflows.
+    <a href="https://github.com/nextauthjs/cli/stargazers">
+      <img src="https://img.shields.io/github/stars/nextauthjs/cli?style=flat-square&color=orange" alt="Github Stars" />
+    </a>
   </p>
 </p>
 
 ## Installation
 
-You don't need to install this package, run any of the following commands:
+You don't need to install this package, run the following:
 
 ```sh
-npx auth
+npx auth # or pnpx, bunx, yarn dlx, etc.
 ```
 
 ## Usage
@@ -75,13 +73,6 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
-        <a href="https://vercel.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/14985020?s=200&v=4" alt="Vercel Logo" />
-        </a><br />
-        <div>Vercel</div>
-        <sub>💵☁️</sub>
-      </td>
-      <td align="center" valign="top">
         <a href="https://fusionauth.io" target="_blank">
           <img width="108" src="https://avatars.githubusercontent.com/u/41974756?s=200&v=4" alt="FusionAuth Logo" />
         </a><br />
@@ -117,19 +108,26 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
-        <a href="https://workos.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/47638084?s=200&v=4" alt="WorkOS Logo" />
+        <a href="https://www.descope.com" target="_blank">
+          <img width="108" src="https://avatars.githubusercontent.com/u/97479186?s=200&v=4" alt="Descope Logo" />
         </a><br />
-        <div>WorkOS</div>
+        <div>Descope</div>
         <sub>💵</sub>
       </td>
     </tr>
     <tr>
       <td align="center" valign="top">
-        <a href="https://www.descope.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/97479186?s=200&v=4" alt="Descope Logo" />
+        <a href="https://badass.dev" target="_blank">
+          <img width="108" src="https://avatars.githubusercontent.com/u/136839242?v=4" alt="Badass Courses Logo" />
         </a><br />
-        <div>Descope</div>
+        <div>Badass Courses</div>
+        <sub>💵</sub>
+      </td>
+      <td align="center" valign="top">
+        <a href="https://github.com/encoredev/encore" target="_blank">
+          <img width="108" src="https://avatars.githubusercontent.com/u/50438175?v=4" alt="Encore Logo" />
+        </a><br />
+        <div>Encore</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
@@ -146,6 +144,20 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
         <div>superblog</div>
         <sub>☁️</sub>
       </td>
+      <td align="center" valign="top">
+        <a href="https://www.netlight.com/" target="_blank">
+          <img width="108" src="https://avatars.githubusercontent.com/u/1672348?s=200&v=4" alt="Netlight logo" />
+        </a><br />
+        <div>Netlight</div>
+        <sub>☁️</sub>
+      </td>
+      <td align="center" valign="top">
+      <a href="https://vercel.com" target="_blank">
+        <img width="108" src="https://avatars.githubusercontent.com/u/14985020?s=200&v=4" alt="Vercel Logo" />
+      </a><br />
+      <div>Vercel</div>
+      <sub>☁️</sub>
+    </td>
     </tr>
   </tbody>
 </table>
