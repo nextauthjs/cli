@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://authjs.dev" target="_blank"><img width="96px" src="https://authjs.dev/img/logo-sm.png" /></a>
-  <h3 align="center">Auth.js CLI</h3>
+  <h1 align="center">Auth.js CLI</h1>
 </p>
 <p align="center">
   The CLI tool by <a href="https://authjs.dev">Auth.js</a> to supercharge your authentication workflows.
