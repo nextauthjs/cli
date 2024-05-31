@@ -1,24 +1,15 @@
 <p align="center">
-  <br/>
   <a href="https://authjs.dev" target="_blank"><img width="96px" src="https://authjs.dev/img/logo-sm.png" /></a>
   <h3 align="center">Auth.js CLI</h3>
-  <p align="center">
-    The CLI tool by <a href="https://authjs.dev">Auth.js</a> to supercharge your authentication workflows.
-  </p>
-  <p align="center" style="align: center;">
-    <a href="https://npm.im/auth">
-      <img src="https://img.shields.io/badge/JavaScript-grey?style=flat-square&logo=javascript" alt="JavaScript" />
-    </a>
-    <a href="https://www.npmtrends.com/auth">
-      <img src="https://img.shields.io/npm/dm/auth?style=flat-square&color=cyan" alt="Downloads" />
-    </a>
-    <a href="https://www.npmjs.com/package/auth">
-      <img src="https://img.shields.io/npm/v/auth?style=flat-square&label=latest&color=purple" alt="npm latest release" />
-    </a>
-    <a href="https://github.com/nextauthjs/cli/stargazers">
-      <img src="https://img.shields.io/github/stars/nextauthjs/cli?style=flat-square&color=orange" alt="Github Stars" />
-    </a>
-  </p>
+</p>
+<p align="center">
+  The CLI tool by <a href="https://authjs.dev">Auth.js</a> to supercharge your authentication workflows.
+</p>
+<p align="center">
+  <a href="https://npm.im/auth"><img src="https://img.shields.io/badge/JavaScript-grey?style=flat-square&logo=javascript" alt="JavaScript" /></a>
+  <a href="https://www.npmtrends.com/auth"><img src="https://img.shields.io/npm/dm/auth?style=flat-square&color=cyan" alt="Downloads" /></a>
+  <a href="https://www.npmjs.com/package/auth"><img src="https://img.shields.io/npm/v/auth?style=flat-square&label=latest&color=purple" alt="npm latest release" /></a>
+  <a href="https://github.com/nextauthjs/cli/stargazers"><img src="https://img.shields.io/github/stars/nextauthjs/cli?style=flat-square&color=orange" alt="Github Stars" /></a>
 </p>
 
 ## Installation
