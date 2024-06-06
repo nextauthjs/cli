@@ -1,5 +1,6 @@
 import * as y from "yoctocolors"
 import { select } from '@inquirer/prompts'
+import { requireFramework } from "../lib/detect.js"
 
 const providers = {
   google: {
@@ -43,5 +44,7 @@ export async function action(provider) {
     process.exit(0)
   }
 
-  console.log(provider)
+  const framework = await requireFramework()
+
+  console.log({ provider, framework })
 }
