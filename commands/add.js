@@ -1,3 +1,4 @@
+import path from 'node:path'
 import * as y from "yoctocolors"
 import { select } from '@inquirer/prompts'
 import { requireFramework } from "../lib/detect.js"
@@ -39,7 +40,10 @@ export async function action(provider) {
     process.exit(0)
   }
 
-  const framework = await requireFramework()
+  const frameworkId = await requireFramework()
+  const framework = frameworks[frameworkId]
+  const baseUrl =  path.join(`http://localhost:${framework.port}`, framework.path)
+  const callbackUrl = path.join(baseUrl, `callbacks/${provider}`)
 
-  console.log({ provider, framework })
+  console.log({ provider, framework, baseUrl, callbackUrl })
 }
