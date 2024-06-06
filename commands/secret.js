@@ -2,7 +2,7 @@
 
 import * as y from "yoctocolors"
 import { write } from "../lib/clipboard/index.js"
-import { detectFramework } from "../lib/detect.js"
+import { requireFramework } from "../lib/detect.js"
 import { join } from "node:path"
 import { updateEnvFile } from "../lib/write-env.js"
 import { frameworks } from "../lib/meta.js"
@@ -50,14 +50,7 @@ export async function action(options) {
   }
 
   try {
-    const framework = await detectFramework(options.path)
-    if (framework === "unknown") {
-      return console.log(
-        `No framework detected. Currently supported frameworks are: ${y.bold(
-          Object.keys(frameworks).join(", ")
-        )}`
-      )
-    }
+    const framework = await requireFramework(options.path)
 
     await updateEnvFile(options.path, key, value)
   } catch (error) {
