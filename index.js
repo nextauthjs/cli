@@ -4,7 +4,7 @@
 
 import { Command, InvalidArgumentError } from "commander"
 import * as y from "yoctocolors"
-import { ask, init, secret } from "./commands/index.js"
+import { ask, init, secret, add } from "./commands/index.js"
 
 // import pkg from "./package.json" assert { type: "json" }
 
@@ -51,6 +51,12 @@ program
   .option("--copy", 'Copy AUTH_SECRET="value".')
   .description("Generate a random string and add it to the .env file.")
   .action(secret.action)
+
+program
+  .command("add")
+  .argument("[provider]", "The authentication provider.")
+  .description('Register a new authentication provider')
+  .action(add.action)
 
 program.parse()
 
