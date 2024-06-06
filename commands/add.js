@@ -1,16 +1,14 @@
 import * as y from "yoctocolors"
 import { select } from '@inquirer/prompts'
 import { requireFramework } from "../lib/detect.js"
+import { providers, frameworks } from "../lib/meta.js"
 
-const providers = {
+const instructions = {
   google: {
-    name: "Google"
   },
   github: {
-    name: "GitHub"
   },
   apple: {
-    name: "Apple"
   }
 }
 
@@ -19,13 +17,10 @@ function hasInstructions(provider) {
 }
 
 async function chooseProvider() {
-  const choices = Object.keys(providers).map((key) => {
-    const provider = providers[key]
+  const choices = Object.keys(instructions).map((value) => {
+    const name = providers[value]
 
-    return {
-      name: provider.name,
-      value: key
-    }
+    return { name, value }
   })
 
   return await select({
@@ -40,7 +35,7 @@ export async function action(provider) {
   }
 
   if (!hasInstructions(provider)) {
-    console.error(y.red(`Missing instructions for ${provider}.\nAvailable providers are: ${y.bold(Object.keys(providers).sort().join(', '))}`))
+    console.error(y.red(`Missing instructions for ${provider}.\nInstructions are available for: ${y.bold(Object.keys(instructions).sort().join(', '))}`))
     process.exit(0)
   }
 
