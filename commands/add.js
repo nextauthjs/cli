@@ -1,8 +1,9 @@
 import path from 'node:path'
 import * as y from "yoctocolors"
 import open from 'open'
-import { select, confirm } from '@inquirer/prompts'
+import { select, confirm, input } from '@inquirer/prompts'
 import { requireFramework } from "../lib/detect.js"
+import { updateEnvFile } from "../lib/write-env.js"
 import { write as writeClipboard } from "../lib/clipboard/index.js"
 import { providers, frameworks } from "../lib/meta.js"
 
@@ -60,5 +61,10 @@ export async function action(provider) {
   const copy = await confirm({ message: `Copy callback URL? ${y.magenta(callbackUrl)}`})
   if (copy) writeClipboard(callbackUrl)
 
-  console.log({ provider, framework, baseUrl, callbackUrl, setupUrl })
+  const clientId = await input({ message: `Paste ${y.magenta('Client ID')}:`})
+  const clientSecret = await input({ message: `Paste ${y.magenta('Client Secret')}:`})
+  const varPrefix = `AUTH_${provider.toUpperCase()}`
+
+  await updateEnvFile('', `${varPrefix}_ID`, clientId)
+  await updateEnvFile('', `${varPrefix}_SECRET`, clientSecret)
 }
