@@ -1,15 +1,19 @@
 import path from 'node:path'
 import * as y from "yoctocolors"
-import { select } from '@inquirer/prompts'
+import open from 'open'
+import { select, confirm } from '@inquirer/prompts'
 import { requireFramework } from "../lib/detect.js"
 import { providers, frameworks } from "../lib/meta.js"
 
 const instructions = {
   google: {
+    setupUrl: 'https://console.cloud.google.com/apis/credentials/oauthclient'
   },
   github: {
+    setupUrl: 'https://github.com/settings/applications/new'
   },
   apple: {
+    setupUrl: 'https://developer.apple.com/account/resources/identifiers/list/serviceId'
   }
 }
 
@@ -42,8 +46,15 @@ export async function action(provider) {
 
   const frameworkId = await requireFramework()
   const framework = frameworks[frameworkId]
+  const providerName = providers[provider]
   const baseUrl =  path.join(`http://localhost:${framework.port}`, framework.path)
   const callbackUrl = path.join(baseUrl, `callbacks/${provider}`)
+  const { setupUrl } = instructions[provider]
 
-  console.log({ provider, framework, baseUrl, callbackUrl })
+  console.log(`  ${y.bold('Setup')}: ${setupUrl}\n  ${y.bold('App')}: ${baseUrl}\n  ${y.bold('Callback')}: ${callbackUrl}`)
+
+  const openBrowser = await confirm({ message: `Open ${y.magenta(providerName)} setup page?`})
+  if (openBrowser) await open(setupUrl)
+
+  console.log({ provider, framework, baseUrl, callbackUrl, setupUrl })
 }

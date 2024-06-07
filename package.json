@@ -37,6 +37,7 @@
     "@inkeep/ai-api": "^0.7.2",
     "@inquirer/prompts": "3.3.2",
     "commander": "11.1.0",
+    "open": "^10.1.0",
     "ora": "^8.0.1",
     "prompts": "^2.4.2",
     "yoctocolors": "1.0.0"
