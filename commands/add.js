@@ -49,8 +49,8 @@ export async function action(provider) {
   const frameworkId = await requireFramework()
   const framework = frameworks[frameworkId]
   const providerName = providers[provider]
-  const baseUrl =  path.join(`http://localhost:${framework.port}`, framework.path)
-  const callbackUrl = path.join(baseUrl, `callbacks/${provider}`)
+  const baseUrl = `http://localhost:${framework.port}`
+  const callbackUrl = path.join(baseUrl, `auth/callbacks/${provider}`)
   const { setupUrl } = instructions[provider]
 
   console.log(`  ${y.bold('Setup')}: ${setupUrl}\n  ${y.bold('App')}: ${baseUrl}\n  ${y.bold('Callback')}: ${callbackUrl}`)
