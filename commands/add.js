@@ -3,6 +3,7 @@ import * as y from "yoctocolors"
 import open from 'open'
 import { select, confirm } from '@inquirer/prompts'
 import { requireFramework } from "../lib/detect.js"
+import { write as writeClipboard } from "../lib/clipboard/index.js"
 import { providers, frameworks } from "../lib/meta.js"
 
 const instructions = {
@@ -55,6 +56,9 @@ export async function action(provider) {
 
   const openBrowser = await confirm({ message: `Open ${y.magenta(providerName)} setup page?`})
   if (openBrowser) await open(setupUrl)
+
+  const copy = await confirm({ message: `Copy callback URL? ${y.magenta(callbackUrl)}`})
+  if (copy) writeClipboard(callbackUrl)
 
   console.log({ provider, framework, baseUrl, callbackUrl, setupUrl })
 }
