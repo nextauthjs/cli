@@ -36,7 +36,7 @@ export async function action(framework, options) {
     const providers = await checkbox({
       instructions: false,
       message: "Select one or multiple providers",
-      choices: Object.entries(meta.providers).map(([value, name]) => ({
+      choices: Object.entries(meta.providers).map(([value, { name }]) => ({
         name,
         value,
       })),
@@ -76,7 +76,7 @@ async function createFromExample(framework, dir) {
     })
   ) {
     execSync(`cd ${dir}`)
-    await secretAction({ write: true, path: dir })
+    await secretAction({ path: dir })
   }
 
   await install()
@@ -110,7 +110,12 @@ async function scaffoldProject(options) {
   for (const provider of providers) {
     const id = `AUTH_${provider.toUpperCase()}_ID`
     const secret = `AUTH_${provider.toUpperCase()}_SECRET`
-    await updateEnvFile(dir, id, "")
-    await updateEnvFile(dir, secret, "")
+    await updateEnvFile(
+      {
+        [id]: "",
+        [secret]: "",
+      },
+      dir
+    )
   }
 }

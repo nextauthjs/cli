@@ -1,11 +1,9 @@
 // @ts-check
 
 import * as y from "yoctocolors"
-import { write } from "../lib/clipboard/index.js"
+import clipboard from "clipboardy"
 import { requireFramework } from "../lib/detect.js"
-import { join } from "node:path"
 import { updateEnvFile } from "../lib/write-env.js"
-import { frameworks } from "../lib/meta.js"
 
 /** Web compatible method to create a random string of a given length */
 function randomString(size = 32) {
@@ -19,7 +17,6 @@ function randomString(size = 32) {
  *  copy?: boolean
  *  path?: string
  *  raw?: boolean
- *  write?:boolean
  * }} options
  */
 export async function action(options) {
@@ -38,7 +35,7 @@ export async function action(options) {
 
   if (options.copy) {
     try {
-      write(line)
+      clipboard.writeSync(line)
       console.log(message.introClipboard)
     } catch (error) {
       console.error(y.red(error))
@@ -50,9 +47,8 @@ export async function action(options) {
   }
 
   try {
-    const framework = await requireFramework(options.path)
-
-    await updateEnvFile(options.path, key, value)
+    await requireFramework(options.path)
+    await updateEnvFile({ [key]: value }, options.path, true)
   } catch (error) {
     console.error(y.red(error))
   }
