@@ -5,6 +5,7 @@ import { input } from "@inquirer/prompts"
 import { InkeepAI } from "@inkeep/ai-api"
 import { ChatModeOptions } from "@inkeep/ai-api/models/components/index.js"
 import * as ora from "ora"
+import { link, markdownToAnsi, breakStringToLines } from "../lib/markdown.js"
 
 const INKEEP_API_KEY = "e32967a320a48a2cd933922099e1f38f6ebb4ab62ff98343"
 const INKEEP_INTEGRATION_ID = "clvn0fdez000cip0e5w2oaobw"
@@ -86,61 +87,4 @@ export async function action({ stream = false, raw = false }) {
   } finally {
     spinner.stop().clear()
   }
-}
-
-// double char markdown matchers
-const BOLD_REGEX = /\*{2}([^*]+)\*{2}/g
-const UNDERLINE_REGEX = /_{2}([^_]+)_{2}/g
-const STRIKETHROUGH_REGEX = /~{2}([^~]+)~{2}/g
-const LINK_REGEX = /\[([^\]]+)\]\(([^)]+)\)/g
-
-// single char markdown matchers
-const ITALIC_REGEX = /(?<!\\)\*(.+)(?<!\\)\*|(?<!\\)_(.+)(?<!\\)_/g
-
-function link(text, url) {
-  return `\x1b]8;;${url}\x1b\\${text}\x1b]8;;\x1b\\`
-}
-
-/**
- * @param {string} input
- * @returns {string}
- */
-function markdownToAnsi(input) {
-  input = input.replace(BOLD_REGEX, (...args) => y.bold(args[1]))
-  input = input.replace(UNDERLINE_REGEX, (...args) => y.underline(args[1]))
-  input = input.replace(STRIKETHROUGH_REGEX, (...args) =>
-    y.strikethrough(args[1])
-  )
-  input = input.replace(ITALIC_REGEX, (...args) => y.italic(args[1] || args[2]))
-  input = input.replace(/(?<!\\)\\/g, "")
-
-  // @ts-expect-error
-  input = input.replaceAll(LINK_REGEX, (...args) =>
-    y.blue(" " + link(args[2], args[1]))
-  )
-  return input
-}
-
-/**
- * @param {string} str
- * @param {number} maxLineLength
- * @returns {string}
- */
-function breakStringToLines(str, maxLineLength) {
-  let result = ""
-  let line = ""
-
-  str.split(" ").forEach((word) => {
-    if (line.length + word.length + 1 > maxLineLength) {
-      result += line + "\n"
-      line = word
-    } else {
-      if (line) line += " "
-      line += word
-    }
-  })
-
-  if (line) result += line
-
-  return result
 }
