@@ -34,7 +34,9 @@ Options:
 Commands:
   ask [options]               Ask about docs, API, or auth concepts.
   init [options] [framework]  Initialize a project.
-  secret [options]            Generate a random string.
+  secret [options]            Generate a random string and add it to the .env
+                              file.
+  add [provider]              Register a new authentication provider
   help [command]              display help for command
 ```
 
