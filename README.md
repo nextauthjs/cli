@@ -1,5 +1,7 @@
 <p align="center">
-  <a href="https://authjs.dev" target="_blank"><img width="96px" src="https://authjs.dev/img/logo-sm.png" /></a>
+<svg height="96" stroke-linejoin="round" viewBox="0 0 96 96" width="96" style="margin-right: 16px">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9 15H87V75C87 78.314 84.314 81 81 81H15C11.686 81 9 78.314 9 75V15ZM0 6H9H87H96V15V75C96 83.284 88.284 91 80 91H16C7.716 91 0 83.284 0 75V15V6ZM24 66.8034L26.6516 64.1518L39.0909 51.7125C41.1412 49.6622 41.1412 46.3378 39.0909 44.2875L26.6516 31.8482L24 29.1966L18.6966 34.5L21.3482 37.1518L32.1966 48L21.3482 58.8482L18.6966 61.5L24 66.8034ZM48 58.5296H51.735H70.5H74.235V66H70.5H51.735H48V58.5296Z"></path>
+</svg><a href="https://authjs.dev" target="_blank"><img width="96px" src="https://authjs.dev/img/logo-sm.png" /></a>
   <h1 align="center">Auth.js CLI</h1>
 </p>
 <p align="center">
@@ -11,6 +13,13 @@
   <a href="https://www.npmjs.com/package/auth"><img src="https://img.shields.io/npm/v/auth?style=flat-square&label=latest&color=purple" alt="npm latest release" /></a>
   <a href="https://github.com/nextauthjs/cli/stargazers"><img src="https://img.shields.io/github/stars/nextauthjs/cli?style=flat-square&color=orange" alt="Github Stars" /></a>
 </p>
+
+## Features
+
+- Natural language search to answer questions about Auth.js, docs, APIs, or general auth concepts
+- Initialize new projects with Auth.js for any of the supported frameworks
+- Guides you through adding authentication providers to your existing project
+- ... and more coming soon!
 
 ## Installation
 
@@ -124,6 +133,13 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
+        <a href="https://arcjet.com/" target="_blank">
+          <img width="108" src="https://avatars.githubusercontent.com/u/24397786?s=200&v=4" alt="Arcjet Logo" />
+        </a><br />
+        <div>Arcjet</div>
+        <sub>💵</sub>
+      </td>
+      <td align="center" valign="top">
         <a href="https://checklyhq.com" target="_blank">
           <img width="108" src="https://avatars.githubusercontent.com/u/25982255?s=200&v=4" alt="Checkly Logo" />
         </a><br />
@@ -145,12 +161,12 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
         <sub>☁️</sub>
       </td>
       <td align="center" valign="top">
-      <a href="https://vercel.com" target="_blank">
-        <img width="108" src="https://avatars.githubusercontent.com/u/14985020?s=200&v=4" alt="Vercel Logo" />
-      </a><br />
-      <div>Vercel</div>
-      <sub>☁️</sub>
-    </td>
+        <a href="https://vercel.com" target="_blank">
+          <img width="108" src="https://avatars.githubusercontent.com/u/14985020?s=200&v=4" alt="Vercel Logo" />
+        </a><br />
+        <div>Vercel</div>
+        <sub>☁️</sub>
+      </td>
     </tr>
   </tbody>
 </table>
