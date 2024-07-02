@@ -8,7 +8,7 @@
   },
   "description": "The CLI tool by Auth.js to supercharge your authentication workflows.",
   "scripts": {
-    "generate-docs": "node ./generate-docs"
+    "generate-docs": "node ./scripts/generate-docs"
   },
   "author": "Balázs Orbán <info@balazsorban.com>",
   "contributors": [
@@ -25,6 +25,7 @@
   "files": [
     "*.d.ts*",
     "*.js",
+    "!scripts",
     "commands",
     "lib",
     "src"
