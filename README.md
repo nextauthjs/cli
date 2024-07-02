@@ -32,7 +32,7 @@ npx auth # or pnpx, bunx, yarn dlx, etc.
 
 <!-- GENERATED START -->
 
-```sh
+```
 Usage: auth [options] [command]
 
 Options:

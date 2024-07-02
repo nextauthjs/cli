@@ -14,11 +14,11 @@ output = output.replace(
   ""
 )
 
-const readmePath = join(__dirname, "./README.md")
+const readmePath = join(__dirname, "../README.md")
 const readme = await fs.readFile(readmePath, "utf-8")
 
 const updatedReadme = readme.replace(
-  /(?<=<!-- GENERATED START -->\n\n```sh\n)[\s\S]*?(?=```\n\n<!-- GENERATED END -->)/,
+  /(?<=<!-- GENERATED START -->\n\n```\n)[\s\S]*?(?=```\n\n<!-- GENERATED END -->)/,
   output
 )
 
