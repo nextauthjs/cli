@@ -132,7 +132,7 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
-        <a href="https://arcjet.com/" target="_blank">
+        <a href="https://arcjet.com/?ref=auth.js" target="_blank">
           <img width="108" src="https://avatars.githubusercontent.com/u/24397786?s=200&v=4" alt="Arcjet Logo" />
         </a><br />
         <div>Arcjet</div>
