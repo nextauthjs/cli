@@ -7,8 +7,9 @@ import { select, input, password } from "@inquirer/prompts"
 import { requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 import { providers, frameworks } from "../lib/meta.js"
-import { secret } from "./index.js"
 import { link, markdownToAnsi } from "../lib/markdown.js"
+import { appleGenSecret } from "../lib/apple-gen-secret.js"
+import { ensureAuthSecretExist } from "../lib/ensure-auth-secret-exist.js"
 
 const choices = Object.entries(providers)
   .filter(([, { setupUrl }]) => !!setupUrl)
@@ -78,35 +79,44 @@ ${y.bold("Callback URL (copied to clipboard)")}: ${url}`
 
     await open(provider.setupUrl)
 
-    const clientId = await input({
-      message: `Paste ${y.magenta("Client ID")}:`,
-      validate: (value) => !!value,
-    })
-    const clientSecret = await password({
-      message: `Paste ${y.magenta("Client secret")}:`,
-      mask: true,
-      validate: (value) => !!value,
-    })
+    if (providerId === "apple") {
+      const clientId = await input({
+        message: `Paste ${y.magenta("Client ID")}:`,
+        validate: (value) => !!value,
+      })
+      const keyId = await input({
+        message: `Paste ${y.magenta("Key ID")}:`,
+        validate: (value) => !!value,
+      })
+      const teamId = await input({
+        message: `Paste ${y.magenta("Team ID")}:`,
+        validate: (value) => !!value,
+      })
 
-    console.log(y.dim(`Updating environment variable file...`))
+      console.log(y.dim(`Updating environment variable file...`))
 
-    const varPrefix = `AUTH_${providerId.toUpperCase()}`
+      await appleGenSecret({ teamId, clientId, keyId })
+      await ensureAuthSecretExist()
+    } else {
+      const clientId = await input({
+        message: `Paste ${y.magenta("Client ID")}:`,
+        validate: (value) => !!value,
+      })
+      const clientSecret = await password({
+        message: `Paste ${y.magenta("Client secret")}:`,
+        mask: true,
+        validate: (value) => !!value,
+      })
 
-    await updateEnvFile({
-      [`${varPrefix}_ID`]: clientId,
-      [`${varPrefix}_SECRET`]: clientSecret,
-    })
+      console.log(y.dim(`Updating environment variable file...`))
 
-    console.log(
-      y.dim(
-        `\nEnsuring that ${link(
-          "AUTH_SECRET",
-          "https://authjs.dev/getting-started/installation#setup-environment"
-        )} is set...`
-      )
-    )
-
-    await secret.action({})
+      const varPrefix = `AUTH_${providerId.toUpperCase()}`
+      await updateEnvFile({
+        [`${varPrefix}_ID`]: clientId,
+        [`${varPrefix}_SECRET`]: clientSecret,
+      })
+      await ensureAuthSecretExist()
+    }
 
     console.log("\n🎉 Done! You can now use this provider in your app.")
   } catch (error) {
