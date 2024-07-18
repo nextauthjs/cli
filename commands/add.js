@@ -3,13 +3,14 @@
 import * as y from "yoctocolors"
 import open from "open"
 import clipboard from "clipboardy"
-import { select, input, password } from "@inquirer/prompts"
+import { select } from "@inquirer/prompts"
 import { requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 import { providers, frameworks } from "../lib/meta.js"
 import { link, markdownToAnsi } from "../lib/markdown.js"
 import { appleGenSecret } from "../lib/apple-gen-secret.js"
 import { ensureAuthSecretExist } from "../lib/ensure-auth-secret-exist.js"
+import { promptInput, promptPassword } from "../lib/inquirer-prompts.js"
 
 const choices = Object.entries(providers)
   .filter(([, { setupUrl }]) => !!setupUrl)
@@ -80,33 +81,17 @@ ${y.bold("Callback URL (copied to clipboard)")}: ${url}`
     await open(provider.setupUrl)
 
     if (providerId === "apple") {
-      const clientId = await input({
-        message: `Paste ${y.magenta("Client ID")}:`,
-        validate: (value) => !!value,
-      })
-      const keyId = await input({
-        message: `Paste ${y.magenta("Key ID")}:`,
-        validate: (value) => !!value,
-      })
-      const teamId = await input({
-        message: `Paste ${y.magenta("Team ID")}:`,
-        validate: (value) => !!value,
-      })
+      const clientId = await promptInput("Client ID")
+      const keyId = await promptInput("Key ID")
+      const teamId = await promptInput("Team ID")
 
       console.log(y.dim(`Updating environment variable file...`))
 
       await appleGenSecret({ teamId, clientId, keyId })
       await ensureAuthSecretExist()
     } else {
-      const clientId = await input({
-        message: `Paste ${y.magenta("Client ID")}:`,
-        validate: (value) => !!value,
-      })
-      const clientSecret = await password({
-        message: `Paste ${y.magenta("Client secret")}:`,
-        mask: true,
-        validate: (value) => !!value,
-      })
+      const clientId = await promptInput("Client ID")
+      const clientSecret = await promptPassword("Client Secret")
 
       console.log(y.dim(`Updating environment variable file...`))
 
