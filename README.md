@@ -68,65 +68,72 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
     <tr>
       <td align="center" valign="top">
         <a href="https://clerk.com?utm_source=sponsorship&utm_medium=github&utm_campaign=authjs&utm_content=sponsor" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/49538330?s=200&v=4" alt="Clerk Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/49538330?s=200&v=4" alt="Clerk Logo" />
         </a><br />
         <div>Clerk</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://fusionauth.io" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/41974756?s=200&v=4" alt="FusionAuth Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/41974756?s=200&v=4" alt="FusionAuth Logo" />
         </a><br />
         <div>FusionAuth</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://www.beyondidentity.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/69811361?s=200&v=4" alt="Beyond Identity Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/69811361?s=200&v=4" alt="Beyond Identity Logo" />
         </a><br />
         <div>Beyond Identity</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://stytch.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/69983493?s=200&v=4" alt="Stytch Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/69983493?s=200&v=4" alt="Stytch Logo" />
         </a><br />
         <div>Stytch</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://prisma.io" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/17219288?s=200&v=4" alt="Prisma Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/17219288?s=200&v=4" alt="Prisma Logo" />
         </a><br />
         <div>Prisma</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
+        <a href="https://auth0.com" target="_blank">
+          <img height="96" src="https://avatars.githubusercontent.com/u/2824157?v=4" alt="Auth0 Logo" />
+        </a><br />
+        <div>Auth0</div>
+        <sub>💵</sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top">
         <a href="https://lowdefy.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/47087496?s=200&v=4" alt="Lowdefy Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/47087496?s=200&v=4" alt="Lowdefy Logo" />
         </a><br />
         <div>Lowdefy</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://www.descope.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/97479186?s=200&v=4" alt="Descope Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/97479186?s=200&v=4" alt="Descope Logo" />
         </a><br />
         <div>Descope</div>
         <sub>💵</sub>
       </td>
-    </tr>
-    <tr>
       <td align="center" valign="top">
         <a href="https://badass.dev" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/136839242?v=4" alt="Badass Courses Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/136839242?v=4" alt="Badass Courses Logo" />
         </a><br />
         <div>Badass Courses</div>
         <sub>💵</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://github.com/encoredev/encore" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/50438175?v=4" alt="Encore Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/50438175?v=4" alt="Encore Logo" />
         </a><br />
         <div>Encore</div>
         <sub>💵</sub>
@@ -138,30 +145,32 @@ We have an [OpenCollective](https://opencollective.com/nextauth) for companies a
         <div>Arcjet</div>
         <sub>💵</sub>
       </td>
+    </tr>
+    <tr>
       <td align="center" valign="top">
         <a href="https://checklyhq.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/25982255?s=200&v=4" alt="Checkly Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/25982255?s=200&v=4" alt="Checkly Logo" />
         </a><br />
         <div>Checkly</div>
         <sub>☁️</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://superblog.ai/" target="_blank">
-          <img width="108" src="https://d33wubrfki0l68.cloudfront.net/cdc4a3833bd878933fcc131655878dbf226ac1c5/10cd6/images/logo_bolt_small.png" alt="superblog Logo" />
+          <img height="96" src="https://d33wubrfki0l68.cloudfront.net/cdc4a3833bd878933fcc131655878dbf226ac1c5/10cd6/images/logo_bolt_small.png" alt="superblog Logo" />
         </a><br />
         <div>superblog</div>
         <sub>☁️</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://www.netlight.com/" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/1672348?s=200&v=4" alt="Netlight logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/1672348?s=200&v=4" alt="Netlight logo" />
         </a><br />
         <div>Netlight</div>
         <sub>☁️</sub>
       </td>
       <td align="center" valign="top">
         <a href="https://vercel.com" target="_blank">
-          <img width="108" src="https://avatars.githubusercontent.com/u/14985020?s=200&v=4" alt="Vercel Logo" />
+          <img height="96" src="https://avatars.githubusercontent.com/u/14985020?s=200&v=4" alt="Vercel Logo" />
         </a><br />
         <div>Vercel</div>
         <sub>☁️</sub>
