@@ -3,12 +3,33 @@
 import * as y from "yoctocolors"
 import open from "open"
 import clipboard from "clipboardy"
-import { select, input, password } from "@inquirer/prompts"
+import { select, input, password, number } from "@inquirer/prompts"
 import { requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 import { providers, frameworks } from "../lib/meta.js"
-import { secret } from "./index.js"
 import { link, markdownToAnsi } from "../lib/markdown.js"
+import { appleGenSecret } from "../lib/apple-gen-secret.js"
+
+/**
+ * @param {string} label
+ * @param {string} [defaultValue]
+ */
+async function promptInput(label, defaultValue) {
+  return input({
+    message: `Paste ${y.magenta(label)}:`,
+    validate: (value) => !!value,
+    default: defaultValue,
+  })
+}
+
+/** @param {string} label */
+async function promptPassword(label) {
+  return password({
+    message: `Paste ${y.magenta(label)}:`,
+    mask: true,
+    validate: (value) => !!value,
+  })
+}
 
 const choices = Object.entries(providers)
   .filter(([, { setupUrl }]) => !!setupUrl)
@@ -17,19 +38,19 @@ const choices = Object.entries(providers)
 /** @param {string | undefined} providerId */
 export async function action(providerId) {
   try {
-    if (!providerId) {
-      providerId = await select({
+    const pid =
+      providerId ??
+      (await select({
         message: "What provider do you want to set up?",
         choices: choices,
-      })
-    }
+      }))
 
-    const provider = providers[providerId]
+    const provider = providers[pid]
     if (!provider?.setupUrl) {
       console.error(
         y.red(
           `Missing instructions for ${
-            provider?.name ?? providerId
+            provider?.name ?? pid
           }.\nInstructions are available for: ${y.bold(
             choices.map((choice) => choice.name).join(", ")
           )}`
@@ -78,35 +99,48 @@ ${y.bold("Callback URL (copied to clipboard)")}: ${url}`
 
     await open(provider.setupUrl)
 
-    const clientId = await input({
-      message: `Paste ${y.magenta("Client ID")}:`,
-      validate: (value) => !!value,
-    })
-    const clientSecret = await password({
-      message: `Paste ${y.magenta("Client secret")}:`,
-      mask: true,
-      validate: (value) => !!value,
-    })
+    if (providerId === "apple") {
+      const clientId = await promptInput("Client ID")
+      const keyId = await promptInput("Key ID")
+      const teamId = await promptInput("Team ID")
+      const privateKey = await input({
+        message: "Path to Private Key",
+        validate: (value) => !!value,
+        default: "./private-key.p8",
+      })
 
-    console.log(y.dim(`Updating environment variable file...`))
+      const expiresInDays =
+        (await number({
+          message: "Expires in days (default: 180)",
+          required: false,
+          default: 180,
+        })) ?? 180
 
-    const varPrefix = `AUTH_${providerId.toUpperCase()}`
+      console.log(y.dim("Updating environment variable file..."))
 
-    await updateEnvFile({
-      [`${varPrefix}_ID`]: clientId,
-      [`${varPrefix}_SECRET`]: clientSecret,
-    })
+      await updateEnvFile({ AUTH_APPLE_ID: clientId })
 
-    console.log(
-      y.dim(
-        `\nEnsuring that ${link(
-          "AUTH_SECRET",
-          "https://authjs.dev/getting-started/installation#setup-environment"
-        )} is set...`
-      )
-    )
+      const secret = await appleGenSecret({
+        teamId,
+        clientId,
+        keyId,
+        privateKey,
+        expiresInDays,
+      })
 
-    await secret.action({})
+      await updateEnvFile({ AUTH_APPLE_SECRET: secret })
+    } else {
+      const clientId = await promptInput("Client ID")
+      const clientSecret = await promptPassword("Client Secret")
+
+      console.log(y.dim("Updating environment variable file..."))
+
+      const varPrefix = `AUTH_${pid.toUpperCase()}`
+      await updateEnvFile({
+        [`${varPrefix}_ID`]: clientId,
+        [`${varPrefix}_SECRET`]: clientSecret,
+      })
+    }
 
     console.log("\n🎉 Done! You can now use this provider in your app.")
   } catch (error) {
