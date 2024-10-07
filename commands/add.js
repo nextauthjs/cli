@@ -38,19 +38,17 @@ const choices = Object.entries(providers)
 /** @param {string | undefined} providerId */
 export async function action(providerId) {
   try {
-    const pid =
-      providerId ??
-      (await select({
-        message: "What provider do you want to set up?",
-        choices: choices,
-      }))
+    providerId ??= await select({
+      message: "What provider do you want to set up?",
+      choices: choices,
+    })
 
-    const provider = providers[pid]
+    const provider = providers[providerId]
     if (!provider?.setupUrl) {
       console.error(
         y.red(
           `Missing instructions for ${
-            provider?.name ?? pid
+            provider?.name ?? providerId
           }.\nInstructions are available for: ${y.bold(
             choices.map((choice) => choice.name).join(", ")
           )}`
@@ -135,7 +133,7 @@ ${y.bold("Callback URL (copied to clipboard)")}: ${url}`
 
       console.log(y.dim("Updating environment variable file..."))
 
-      const varPrefix = `AUTH_${pid.toUpperCase()}`
+      const varPrefix = `AUTH_${providerId.toUpperCase()}`
       await updateEnvFile({
         [`${varPrefix}_ID`]: clientId,
         [`${varPrefix}_SECRET`]: clientSecret,
