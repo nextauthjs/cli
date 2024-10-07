@@ -3,13 +3,33 @@
 import * as y from "yoctocolors"
 import open from "open"
 import clipboard from "clipboardy"
-import { input, number, select } from "@inquirer/prompts"
+import { input, number, select, password } from "@inquirer/prompts"
 import { requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 import { providers, frameworks } from "../lib/meta.js"
 import { link, markdownToAnsi } from "../lib/markdown.js"
 import { appleGenSecret } from "../lib/apple-gen-secret.js"
-import { promptInput, promptPassword } from "../lib/inquirer-prompts.js"
+
+/**
+ * @param {string} label
+ * @param {string} [defaultValue]
+ */
+export async function promptInput(label, defaultValue) {
+  return input({
+    message: `Paste ${y.magenta(label)}:`,
+    validate: (value) => !!value,
+    default: defaultValue,
+  })
+}
+
+/** @param {string} label */
+export async function promptPassword(label) {
+  return password({
+    message: `Paste ${y.magenta(label)}:`,
+    mask: true,
+    validate: (value) => !!value,
+  })
+}
 
 const choices = Object.entries(providers)
   .filter(([, { setupUrl }]) => !!setupUrl)
@@ -75,9 +95,9 @@ ${y.bold("Callback URL (copied to clipboard)")}: ${url}`
     )
     console.log("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾")
     console.log(y.dim("Opening setup URL in your browser...\n"))
-    // await new Promise((resolve) => setTimeout(resolve, 3000))
+    await new Promise((resolve) => setTimeout(resolve, 3000))
 
-    // await open(provider.setupUrl)
+    await open(provider.setupUrl)
 
     if (providerId === "apple") {
       const clientId = await promptInput("Client ID")
