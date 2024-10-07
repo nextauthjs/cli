@@ -14,7 +14,7 @@ import { appleGenSecret } from "../lib/apple-gen-secret.js"
  * @param {string} label
  * @param {string} [defaultValue]
  */
-export async function promptInput(label, defaultValue) {
+async function promptInput(label, defaultValue) {
   return input({
     message: `Paste ${y.magenta(label)}:`,
     validate: (value) => !!value,
@@ -23,7 +23,7 @@ export async function promptInput(label, defaultValue) {
 }
 
 /** @param {string} label */
-export async function promptPassword(label) {
+async function promptPassword(label) {
   return password({
     message: `Paste ${y.magenta(label)}:`,
     mask: true,
