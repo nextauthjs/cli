@@ -3,7 +3,7 @@
 import * as y from "yoctocolors"
 import open from "open"
 import clipboard from "clipboardy"
-import { input, number, select, password } from "@inquirer/prompts"
+import { select, input, password, number } from "@inquirer/prompts"
 import { requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 import { providers, frameworks } from "../lib/meta.js"
