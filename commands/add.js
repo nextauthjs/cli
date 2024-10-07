@@ -3,7 +3,7 @@
 import * as y from "yoctocolors"
 import open from "open"
 import clipboard from "clipboardy"
-import { input, number, select, password } from "@inquirer/prompts"
+import { select, input, password, number } from "@inquirer/prompts"
 import { requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 import { providers, frameworks } from "../lib/meta.js"
@@ -14,7 +14,7 @@ import { appleGenSecret } from "../lib/apple-gen-secret.js"
  * @param {string} label
  * @param {string} [defaultValue]
  */
-export async function promptInput(label, defaultValue) {
+async function promptInput(label, defaultValue) {
   return input({
     message: `Paste ${y.magenta(label)}:`,
     validate: (value) => !!value,
@@ -23,7 +23,7 @@ export async function promptInput(label, defaultValue) {
 }
 
 /** @param {string} label */
-export async function promptPassword(label) {
+async function promptPassword(label) {
   return password({
     message: `Paste ${y.magenta(label)}:`,
     mask: true,
