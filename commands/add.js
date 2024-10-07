@@ -3,13 +3,12 @@
 import * as y from "yoctocolors"
 import open from "open"
 import clipboard from "clipboardy"
-import { select } from "@inquirer/prompts"
+import { input, number, select } from "@inquirer/prompts"
 import { requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 import { providers, frameworks } from "../lib/meta.js"
 import { link, markdownToAnsi } from "../lib/markdown.js"
 import { appleGenSecret } from "../lib/apple-gen-secret.js"
-import { ensureAuthSecretExist } from "../lib/ensure-auth-secret-exist.js"
 import { promptInput, promptPassword } from "../lib/inquirer-prompts.js"
 
 const choices = Object.entries(providers)
@@ -19,19 +18,19 @@ const choices = Object.entries(providers)
 /** @param {string | undefined} providerId */
 export async function action(providerId) {
   try {
-    if (!providerId) {
-      providerId = await select({
+    const pid =
+      providerId ??
+      (await select({
         message: "What provider do you want to set up?",
         choices: choices,
-      })
-    }
+      }))
 
-    const provider = providers[providerId]
+    const provider = providers[pid]
     if (!provider?.setupUrl) {
       console.error(
         y.red(
           `Missing instructions for ${
-            provider?.name ?? providerId
+            provider?.name ?? pid
           }.\nInstructions are available for: ${y.bold(
             choices.map((choice) => choice.name).join(", ")
           )}`
@@ -76,31 +75,51 @@ ${y.bold("Callback URL (copied to clipboard)")}: ${url}`
     )
     console.log("‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾")
     console.log(y.dim("Opening setup URL in your browser...\n"))
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    // await new Promise((resolve) => setTimeout(resolve, 3000))
 
-    await open(provider.setupUrl)
+    // await open(provider.setupUrl)
 
     if (providerId === "apple") {
       const clientId = await promptInput("Client ID")
       const keyId = await promptInput("Key ID")
       const teamId = await promptInput("Team ID")
+      const privateKey = await input({
+        message: "Path to Private Key",
+        validate: (value) => !!value,
+        default: "./private-key.p8",
+      })
 
-      console.log(y.dim(`Updating environment variable file...`))
+      const expiresInDays =
+        (await number({
+          message: "Expires in days (default: 180)",
+          required: false,
+          default: 180,
+        })) ?? 180
 
-      await appleGenSecret({ teamId, clientId, keyId })
-      await ensureAuthSecretExist()
+      console.log(y.dim("Updating environment variable file..."))
+
+      await updateEnvFile({ AUTH_APPLE_ID: clientId })
+
+      const secret = await appleGenSecret({
+        teamId,
+        clientId,
+        keyId,
+        privateKey,
+        expiresInDays,
+      })
+
+      await updateEnvFile({ AUTH_APPLE_SECRET: secret })
     } else {
       const clientId = await promptInput("Client ID")
       const clientSecret = await promptPassword("Client Secret")
 
-      console.log(y.dim(`Updating environment variable file...`))
+      console.log(y.dim("Updating environment variable file..."))
 
-      const varPrefix = `AUTH_${providerId.toUpperCase()}`
+      const varPrefix = `AUTH_${pid.toUpperCase()}`
       await updateEnvFile({
         [`${varPrefix}_ID`]: clientId,
         [`${varPrefix}_SECRET`]: clientSecret,
       })
-      await ensureAuthSecretExist()
     }
 
     console.log("\n🎉 Done! You can now use this provider in your app.")
