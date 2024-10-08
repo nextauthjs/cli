@@ -48,7 +48,7 @@ export async function action(options) {
 
   try {
     await requireFramework(options.path)
-    await updateEnvFile({ [key]: value }, options.path, true)
+    await updateEnvFile({ [key]: value }, options.path)
   } catch (error) {
     console.error(y.red(error))
   }
