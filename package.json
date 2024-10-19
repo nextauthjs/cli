@@ -4,7 +4,7 @@
   "homepage": "https://cli.authjs.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextauthjs/auth-cli.git"
+    "url": "git+https://github.com/nextauthjs/cli.git"
   },
   "description": "The CLI tool by Auth.js to supercharge your authentication workflows.",
   "scripts": {
