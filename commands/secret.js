@@ -31,6 +31,7 @@ export async function action(options) {
     introCopy:
       "Secret generated. Copy it to your .env/.env.local file (depending on your framework):",
     value: `\n${line}`,
+    multipleFrameworks: `Secret generated. Copy it to your .env/.env.local file (depending on your framework):${value}`,
   }
 
   if (options.copy) {
@@ -47,7 +48,22 @@ export async function action(options) {
   }
 
   try {
-    await requireFramework(options.path)
+    const framework = await requireFramework(options.path)
+    if (framework === "multiple-frameworks-detected") {
+      try {
+        clipboard.writeSync(line)
+        console.log(message.introClipboard)
+      } catch (error) {
+        console.log(
+          "An error occurred while copying the secret to your clipboard."
+        )
+        console.log(message.multipleFrameworks)
+        console.log(message.value)
+      } finally {
+        process.exit(0)
+      }
+    }
+
     await updateEnvFile({ [key]: value }, options.path)
   } catch (error) {
     console.error(y.red(error))
