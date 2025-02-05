@@ -2,7 +2,7 @@
 
 import * as y from "yoctocolors"
 import clipboard from "clipboardy"
-import { requireFramework } from "../lib/detect.js"
+import { detectFramework, requireFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 
 /** Web compatible method to create a random string of a given length */
@@ -47,7 +47,10 @@ export async function action(options) {
   }
 
   try {
-    await requireFramework(options.path)
+    const framework = await detectFramework(options.path)
+    if (framework === "unknown") {
+      return console.log(value)
+    }
     await updateEnvFile({ [key]: value }, options.path)
   } catch (error) {
     console.error(y.red(error))
