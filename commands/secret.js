@@ -2,7 +2,7 @@
 
 import * as y from "yoctocolors"
 import clipboard from "clipboardy"
-import { detectFramework, requireFramework } from "../lib/detect.js"
+import { detectFramework } from "../lib/detect.js"
 import { updateEnvFile } from "../lib/write-env.js"
 
 /** Web compatible method to create a random string of a given length */
