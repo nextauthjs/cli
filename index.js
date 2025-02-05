@@ -2,7 +2,7 @@
 
 // @ts-check
 
-import { Command, InvalidArgumentError } from "commander"
+import { Command } from "commander"
 import * as y from "yoctocolors"
 import { ask, init, secret, add } from "./commands/index.js"
 
@@ -55,7 +55,7 @@ program
 program
   .command("add")
   .argument("[provider]", "The authentication provider.")
-  .description('Register a new authentication provider')
+  .description("Register a new authentication provider")
   .action(add.action)
 
 program.parse()
