@@ -31,7 +31,7 @@ export async function action(framework, options) {
       default: `my-${framework}-app`,
     })
 
-    if (options.example) await createFromExample(framework, dir)
+    if (options.example) return await createFromExample(framework, dir)
 
     const providers = await checkbox({
       instructions: false,
@@ -53,7 +53,8 @@ export async function action(framework, options) {
     })
     adapter = adapter === "none" ? undefined : adapter
 
-    await scaffoldProject({ framework, dir, providers, adapter })
+    //TODO implement scaffolding
+    // await scaffoldProject({ framework, dir, providers, adapter })
   } catch (e) {
     if (!(e instanceof Error)) return
     if (e.message.startsWith("User force closed")) return
@@ -69,22 +70,28 @@ export async function action(framework, options) {
 async function createFromExample(framework, dir) {
   const { src, demo } = meta.frameworks[framework]
   execSync(`git clone ${src} ${dir}`)
+
+  console.log(`Change directory to ${dir}`)
+  process.chdir(dir)
+  console.log("Now in:", process.cwd())
   if (
     await confirm({
-      message: "Initiailze .env with `AUTH_SECRET`",
+      message: "Initialize .env with `AUTH_SECRET`",
       default: true,
     })
   ) {
-    execSync(`cd ${dir}`)
-    await secretAction({ path: dir })
+    await secretAction({ path: "" })
   }
 
   await install()
 
   console.log(`
-  Project ${y.italic(`\`${dir}\``)} has been created.
-  Source code: ${src}
-  Deployed demo: ${demo}`)
+  Project ${y.italic(`\`${dir}\``)} has been created.`)
+  //TODO: Add Implement publish to github
+  //TODO: Add Implement deploy to vercel
+  // Source code: ${src}
+  // Deployed demo: ${demo}
+  // `)
 }
 
 /**
@@ -98,13 +105,8 @@ async function scaffoldProject(options) {
       pkgManager
     )} at ${y.bold(dir)}...`
   )
-  throw new Error("Scaffolding not implemented. Please use `init --example`")
-  console.log(`Create directory ${dir}`)
-  await mkdir(dir)
-  console.log(`Change directory to ${dir}`)
-  execSync(`cd ${dir}`)
-  console.log(`Initialize ${pkgManager} project`)
-  execSync(`${pkgManager} init`)
+  return console.warn("Scaffolding function is not yet implemented.")
+  // throw new Error("Scaffolding not implemented. Please use `init --example`")
   // console.log(`Add ${framework} to ${pkgManager}`)
   // execSync(`${pkgManager} install ${framework}`)
   for (const provider of providers) {
